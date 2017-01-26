@@ -264,6 +264,79 @@ app.post('/addPizza', function(request, response)
 
 //INSERIRE CODICE QUI SOTTO
 
+/**
+ * @brief update pizzas by price
+ * @return a list with the prices updated
+ */
+
+app.post('/updatePizzasByPrice', function(request, response) 
+{
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var price;
+    var increment;
+    var lower;
+	
+	//check body and parameters
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+		if ( typeof request.body.price !== 'undefined' && request.body.price) {
+            if (typeof request.body.increment !== 'undefined' && request.body.increment) {
+                if (typeof request.body.lower !== 'undefined' && request.body.lower) {
+                    price = request.body.price;
+                    increment = request.body.increment;
+                    lower = request.body.lower;
+                }else{
+                    lower = "not defined";
+                }
+            }else{
+                increment = "not defined";
+            }
+        }else{
+            price = "not defined";
+        }
+    }
+	else
+	{
+		price = "body undefined";
+        increment = "body defined";
+        lower = "body defined";
+	}
+    
+    if (price!="not defined" && price!="body undefined"){
+        if (increment!="not defined" && increment!="body undefined"){
+            if (lower!="not defined" && lower!="body undefined"){
+                var menuchanged = pizzaManager.updatePizzasByPrice(price,increment,lower);
+                //if exists
+                if (menuchanged != null)
+                {
+                    response.writeHead(200, headers);
+                    response.end(JSON.stringify(menuchanged));
+                }
+                else
+                {
+                    response.writeHead(404, headers);
+                    response.end(JSON.stringify());
+                }
+            }
+        }
+    }
+    else    
+	{
+		//unaceptable input
+		response.writeHead(406, headers);
+		response.end(JSON.stringify("1"));
+	}   
+
+});
+
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

@@ -72,6 +72,46 @@ paths:
                 type: integer
         404:
           description: no pizzas with that ID or name
+         
+    /addPizza:
+    post:
+      summary: add a pizza
+      description: it add a pizza to the menu, given its ID, name, price, ingridients
+      parameters:
+        - name: ID
+            in: formData
+            description: ID of the pizza
+            required: true
+            type: string
+         - name: name
+            in: formData
+            description: name of the pizza
+            required: true
+            type: string
+           - name: price
+            in: formData
+            description: price of the pizza
+            required: true
+            type: integer
+           - name: ingridients
+            in: formData
+            description: a list of the ingridiets of the pizza
+            required: true
+            type: array
+                item: string
+      responses:
+        200:
+          description: object of the deleted pizza
+          schema: 
+              $ref: "#/definitions/pizza"
+        406:
+          description: ID of error
+          schema: 
+            properties:
+              error:
+                type: integer
+        404:
+          description: no pizzas with that ID or name        
             
   /updatePizzasByPrice:
     post:
