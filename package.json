@@ -1,0 +1,19 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AngeP95/SE2Lab_Exam_2017_01.git"
+  },
+  "author": "ap",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngeP95/SE2Lab_Exam_2017_01/issues"
+  },
+  "homepage": "https://github.com/AngeP95/SE2Lab_Exam_2017_01#readme"
+}
